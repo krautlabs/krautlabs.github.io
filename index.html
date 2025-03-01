@@ -1,663 +1,728 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Krautlabs - AI & Cloud Engineering Solutions</title>
     <style>
-        :root {
-            --primary: #4285F4;
-            --secondary: #34A853;
-            --accent: #FBBC05;
-            --dark: #2A2A2A;
-            --light: #F8F9FA;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .nav-links .contact-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-links .contact-btn:hover {
-            background-color: #3367D6;
-            color: white;
-        }
-        
-        .hero {
-            padding: 160px 0 100px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            text-align: center;
-        }
-        
+      :root {
+        --primary: #4285f4;
+        --secondary: #34a853;
+        --accent: #fbbc05;
+        --dark: #2a2a2a;
+        --light: #f8f9fa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary);
+      }
+
+      .logo span {
+        color: var(--secondary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links .contact-btn {
+        background-color: var(--primary);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .nav-links .contact-btn:hover {
+        background-color: #3367d6;
+        color: white;
+      }
+
+      .hero {
+        padding: 160px 0 100px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: var(--dark);
+      }
+
+      .hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        color: #555;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background-color: var(--primary);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+        transition: background-color 0.3s;
+      }
+
+      .cta-btn:hover {
+        background-color: #3367d6;
+      }
+
+      .services {
+        padding: 100px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        color: var(--dark);
+        margin-bottom: 15px;
+      }
+
+      .section-title p {
+        max-width: 600px;
+        margin: 0 auto;
+        color: #666;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 40px 30px;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+
+      .service-card h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: var(--dark);
+      }
+
+      .service-card p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .service-card a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .service-card a:hover {
+        text-decoration: underline;
+      }
+
+      .about {
+        padding: 100px 0;
+        background-color: #f0f4f8;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .about-image {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-text h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: var(--dark);
+      }
+
+      .about-text p {
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      .stats {
+        padding: 80px 0;
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        text-align: center;
+      }
+
+      .stat-item h3 {
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+
+      .stat-item p {
+        font-size: 18px;
+        opacity: 0.9;
+      }
+
+      .testimonials {
+        padding: 100px 0;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .testimonial-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        background-color: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .author-info h4 {
+        font-size: 18px;
+        color: var(--dark);
+        margin-bottom: 5px;
+      }
+
+      .author-info p {
+        color: #777;
+        font-size: 14px;
+      }
+
+      .contact {
+        padding: 100px 0;
+        background-color: #f0f4f8;
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .contact-info h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--dark);
+      }
+
+      .contact-info p {
+        margin-bottom: 30px;
+        color: #555;
+      }
+
+      .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #555;
+      }
+
+      .contact-form {
+        background-color: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: #3367d6;
+      }
+
+      footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 60px 0 30px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-col h4 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col ul li a {
+        color: #bbb;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-col ul li a:hover {
+        color: white;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid #444;
+        color: #aaa;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--dark);
+          font-size: 36px;
         }
-        
+
         .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: #555;
+          font-size: 18px;
         }
-        
-        .cta-btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-btn:hover {
-            background-color: #3367D6;
-        }
-        
-        .services {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            max-width: 600px;
-            margin: 0 auto;
-            color: #666;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 40px 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .service-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .service-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .service-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .service-card a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .service-card a:hover {
-            text-decoration: underline;
-        }
-        
-        .about {
-            padding: 100px 0;
-            background-color: #f0f4f8;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-image {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .about-text h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            color: #555;
-        }
-        
-        .stats {
-            padding: 80px 0;
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-        
-        .stat-item h3 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        
-        .stat-item p {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        
-        .testimonials {
-            padding: 100px 0;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 30px;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #555;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #555;
-        }
-        
-        .author-info h4 {
-            font-size: 18px;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-        
-        .author-info p {
-            color: #777;
-            font-size: 14px;
-        }
-        
-        .contact {
-            padding: 100px 0;
-            background-color: #f0f4f8;
-        }
-        
+
+        .about-content,
         .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+          grid-template-columns: 1fr;
         }
-        
-        .contact-info h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--dark);
+
+        .nav-links {
+          display: none; /* For simplicity, hide nav on mobile */
         }
-        
-        .contact-info p {
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #555;
-        }
-        
-        .contact-form {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #3367D6;
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-col h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-col ul {
-            list-style: none;
-        }
-        
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-col ul li a {
-            color: #bbb;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-col ul li a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 14px;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-links {
-                display: none; /* For simplicity, hide nav on mobile */
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Kraut<span>Labs</span></div>
-                <div class="nav-links">
-                    <a href="#services">Services</a>
-                    <a href="#about">About</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#contact" class="contact-btn">Contact Us</a>
-                </div>
-            </nav>
-        </div>
+      <div class="container">
+        <nav>
+          <div class="logo">Kraut<span>Labs</span></div>
+          <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <!--<a href="#testimonials">Testimonials</a>-->
+            <a href="#contact" class="contact-btn">Contact Us</a>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <section class="hero">
-        <div class="container">
-            <h1>Scale Your AI Solutions with Expert Guidance</h1>
-            <p>We help businesses harness the power of artificial intelligence through expert consulting, custom LLM fine-tuning, and scalable cloud engineering.</p>
-            <a href="#contact" class="cta-btn">Get Started</a>
-        </div>
+      <div class="container">
+        <h1>Scale Your AI Solutions with Expert Guidance</h1>
+        <p>
+          We help businesses harness the power of artificial intelligence
+          through expert consulting, custom LLM fine-tuning, and scalable cloud
+          engineering.
+        </p>
+        <a href="#contact" class="cta-btn">Contact Us</a>
+      </div>
     </section>
 
     <section id="services" class="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>We provide end-to-end solutions to help you navigate the complex world of AI and cloud infrastructure.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🤖</div>
-                    <h3>AI Consulting</h3>
-                    <p>Strategic guidance to identify and implement AI solutions that drive business value. We help you navigate the complex landscape of artificial intelligence to find the right applications for your unique needs.</p>
-                    <a href="#contact">Learn more →</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <h3>LLM Fine-Tuning</h3>
-                    <p>Customize large language models to your specific domain and use case. Our experts optimize models for your data and requirements, ensuring you get maximum performance and relevance.</p>
-                    <a href="#contact">Learn more →</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">☁️</div>
-                    <h3>Cloud Engineering</h3>
-                    <p>Build scalable, resilient infrastructure for your AI applications. We design and implement cloud solutions that can handle the demands of modern AI workloads while optimizing for cost and performance.</p>
-                    <a href="#contact">Learn more →</a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Services</h2>
+          <p>
+            We provide end-to-end solutions to help you navigate the complex
+            world of AI and cloud infrastructure.
+          </p>
         </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🤖</div>
+            <h3>AI Consulting</h3>
+            <p>
+              Strategic guidance to identify and implement AI solutions that
+              drive business value. We help you navigate the complex landscape
+              of artificial intelligence to find the right applications for your
+              unique needs.
+            </p>
+            <a href="#contact">Learn more →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">⚙️</div>
+            <h3>LLM Fine-Tuning</h3>
+            <p>
+              Customize large language models to your specific domain and use
+              case. Our experts optimize models for your data and requirements,
+              ensuring you get maximum performance and relevance.
+            </p>
+            <a href="#contact">Learn more →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">☁️</div>
+            <h3>Cloud Engineering</h3>
+            <p>
+              Build scalable, resilient infrastructure for your AI applications.
+              We design and implement cloud solutions that can handle the
+              demands of modern AI workloads while optimizing for cost and
+              performance.
+            </p>
+            <a href="#contact">Learn more →</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <img src="/api/placeholder/600/400" alt="Team of AI specialists at work" class="about-image">
-                <div class="about-text">
-                    <h2>About Krautlabs</h2>
-                    <p>Krautlabs was founded in 2022 by a team of AI researchers and cloud engineers who saw the need for specialized expertise in deploying and scaling artificial intelligence solutions.</p>
-                    <p>Our mission is to make advanced AI technology accessible and practical for businesses of all sizes. We combine deep technical knowledge with business acumen to deliver solutions that create real impact.</p>
-                    <p>With a team of experts in machine learning, cloud architecture, and software engineering, we're uniquely positioned to help you navigate the complex world of AI implementation.</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="about-content">
+          <img
+            src="img/teamwork.jpg"
+            alt="Team of AI specialists at work; License: Pexels Free to use"
+            class="about-image"
+          />
+          <div class="about-text">
+            <h2>About Krautlabs</h2>
+            <p>
+              Krautlabs was founded in 2024 by a team of AI specialists who saw
+              the need for specialized expertise in deploying and scaling
+              artificial intelligence solutions.
+            </p>
+            <p>
+              Our mission is to make advanced AI technology accessible and
+              practical for businesses of all sizes. We combine deep technical
+              knowledge with business acumen to deliver solutions that create
+              real impact.
+            </p>
+            <p>
+              With a team of experts in machine learning, cloud architecture,
+              and software engineering, we're uniquely positioned to help you
+              navigate the complex world of AI implementation.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>50+</h3>
-                    <p>Successful Projects</p>
-                </div>
-                <div class="stat-item">
-                    <h3>30+</h3>
-                    <p>Happy Clients</p>
-                </div>
-                <div class="stat-item">
-                    <h3>15+</h3>
-                    <p>AI Experts</p>
-                </div>
-                <div class="stat-item">
-                    <h3>98%</h3>
-                    <p>Client Satisfaction</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="stats-grid">
+          <!--<div class="stat-item">-->
+          <!--    <h3>50+</h3>-->
+          <!--    <p>Successful Projects</p>-->
+          <!--</div>-->
+          <!--<div class="stat-item">-->
+          <!--    <h3>30+</h3>-->
+          <!--    <p>Happy Clients</p>-->
+          <!--</div>-->
+          <!--<div class="stat-item">-->
+          <!--    <h3>15+</h3>-->
+          <!--    <p>AI Experts</p>-->
+          <!--</div>-->
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Client Satisfaction Guaranteed</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Clients Say</h2>
-                <p>Don't just take our word for it. Hear from organizations that have transformed their operations with our help.</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Krautlabs helped us implement a custom LLM solution that increased our customer service efficiency by 60%. Their expertise in fine-tuning was invaluable."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div class="author-info">
-                            <h4>Jane Doe</h4>
-                            <p>CTO, TechCorp</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The cloud architecture Krautlabs designed for our AI pipeline has been rock-solid. It scales effortlessly with our growing demand and has significantly reduced our operational costs."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MS</div>
-                        <div class="author-info">
-                            <h4>Michael Smith</h4>
-                            <p>Head of Engineering, DataViz</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Working with Krautlabs gave us the strategic direction we needed. Their consulting services helped us identify the right AI applications for our business needs."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AJ</div>
-                        <div class="author-info">
-                            <h4>Amanda Johnson</h4>
-                            <p>CEO, Innovate Inc.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!--<section id="testimonials" class="testimonials">-->
+    <!--  <div class="container">-->
+    <!--    <div class="section-title">-->
+    <!--      <h2>What Our Clients Say</h2>-->
+    <!--      <p>-->
+    <!--        Don't just take our word for it. Hear from organizations that have-->
+    <!--        transformed their operations with our help.-->
+    <!--      </p>-->
+    <!--    </div>-->
+    <!--    <div class="testimonial-grid">-->
+    <!--      <div class="testimonial-card">-->
+    <!--        <p class="testimonial-text">-->
+    <!--          "Krautlabs helped us implement a custom LLM solution that-->
+    <!--          increased our customer service efficiency by 60%. Their expertise-->
+    <!--          in fine-tuning was invaluable."-->
+    <!--        </p>-->
+    <!--        <div class="testimonial-author">-->
+    <!--          <div class="author-avatar">JD</div>-->
+    <!--          <div class="author-info">-->
+    <!--            <h4>Jane Doe</h4>-->
+    <!--            <p>CTO, TechCorp</p>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="testimonial-card">-->
+    <!--        <p class="testimonial-text">-->
+    <!--          "The cloud architecture Krautlabs designed for our AI pipeline has-->
+    <!--          been rock-solid. It scales effortlessly with our growing demand-->
+    <!--          and has significantly reduced our operational costs."-->
+    <!--        </p>-->
+    <!--        <div class="testimonial-author">-->
+    <!--          <div class="author-avatar">MS</div>-->
+    <!--          <div class="author-info">-->
+    <!--            <h4>Michael Smith</h4>-->
+    <!--            <p>Head of Engineering, DataViz</p>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="testimonial-card">-->
+    <!--        <p class="testimonial-text">-->
+    <!--          "Working with Krautlabs gave us the strategic direction we needed.-->
+    <!--          Their consulting services helped us identify the right AI-->
+    <!--          applications for our business needs."-->
+    <!--        </p>-->
+    <!--        <div class="testimonial-author">-->
+    <!--          <div class="author-avatar">AJ</div>-->
+    <!--          <div class="author-info">-->
+    <!--            <h4>Amanda Johnson</h4>-->
+    <!--            <p>CEO, Innovate Inc.</p>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</section>-->
 
     <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>Ready to transform your business with AI? Contact us today to schedule a consultation.</p>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p>Have questions about our services or want to discuss your project? Reach out to us using any of the methods below, and we'll get back to you promptly.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span>📍</span>
-                            <p>123 AI Avenue, Tech District, Berlin, Germany</p>
-                        </div>
-                        <div class="contact-item">
-                            <span>📞</span>
-                            <p>+49 123 456 7890</p>
-                        </div>
-                        <div class="contact-item">
-                            <span>✉️</span>
-                            <p>info@krautlabs.com</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Get In Touch</h2>
+          <p>
+            Ready to transform your business with AI? Contact us today to
+            schedule a consultation.
+          </p>
         </div>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p>
+              Have questions about our services or want to discuss your project?
+              Reach out to us using any of the methods below, and we'll get back
+              to you promptly.
+            </p>
+            <div class="contact-details">
+              <!--<div class="contact-item">-->
+              <!--  <span>📍</span>-->
+              <!--  <p>123 AI Avenue, Tech District, Berlin, Germany</p>-->
+              <!--</div>-->
+              <!--<div class="contact-item">-->
+              <!--  <span>📞</span>-->
+              <!--  <p>+49 123 456 7890</p>-->
+              <!--</div>-->
+              <div class="contact-item">
+                <span>✉️</span>
+                <p>info@krautlabs.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form action="#" method="POST">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Krautlabs</h4>
-                    <p>Empowering businesses with advanced AI solutions and cloud engineering expertise.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">AI Consulting</a></li>
-                        <li><a href="#services">LLM Fine-Tuning</a></li>
-                        <li><a href="#services">Cloud Engineering</a></li>
-                        <li><a href="#contact">Custom Solutions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Krautlabs. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Krautlabs</h4>
+            <p>
+              Empowering businesses with advanced AI solutions and cloud
+              engineering expertise.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">AI Consulting</a></li>
+              <li><a href="#services">LLM Fine-Tuning</a></li>
+              <li><a href="#services">Cloud Engineering</a></li>
+              <li><a href="#contact">Custom Solutions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <!--<li><a href="#testimonials">Testimonials</a></li>-->
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Krautlabs. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
